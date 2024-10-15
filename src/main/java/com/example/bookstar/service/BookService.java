@@ -24,4 +24,23 @@ public class BookService {
         }
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
+
+    public ResponseEntity<Book> getBookById(int id) {
+        try {
+            return new ResponseEntity<>(bookDao.findById(id).get(), HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    public ResponseEntity<Book> addBook(Book book) {
+        try {
+            bookDao.save(book);
+            return new ResponseEntity<>(book, HttpStatus.CREATED);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    }
 }
