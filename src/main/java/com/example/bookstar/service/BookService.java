@@ -43,4 +43,20 @@ public class BookService {
         }
         return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
+
+    public ResponseEntity<Book> updateBook(int id, Book book) {
+        try {
+            Book bookFromDb = bookDao.findById(id).get();
+            bookFromDb.setTitle(book.getTitle());
+            bookFromDb.setAuthor(book.getAuthor());
+            bookFromDb.setGenre(book.getGenre());
+            bookFromDb.setRate(book.getRate());
+            bookFromDb.setResume(book.getResume());
+            bookDao.save(bookFromDb);
+            return new ResponseEntity<>(bookFromDb, HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    }
 }

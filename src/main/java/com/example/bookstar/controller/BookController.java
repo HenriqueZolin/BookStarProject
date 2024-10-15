@@ -30,4 +30,9 @@ public class BookController {
     public ResponseEntity<Book> addBook(@RequestBody Book book){
         return bookService.addBook(book);
     }
+
+    @PatchMapping("updateBook/{id}")
+    public ResponseEntity<Book> updateBook(@PathVariable int id, @RequestBody Book book){
+        return bookService.updateBook(id, book);
+    }
 }
