@@ -1,9 +1,6 @@
 package com.example.bookstar.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -18,4 +15,8 @@ public class Book {
     private String genre;
     private float rate;
     private String resume;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private Usuario usuario;
 }

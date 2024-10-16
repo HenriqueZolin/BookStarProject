@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookService {
@@ -58,5 +59,15 @@ public class BookService {
             e.printStackTrace();
         }
         return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    }
+
+    public ResponseEntity<String> deleteBook(int id) {
+        try {
+            bookDao.deleteById(id);
+            return new ResponseEntity<>("Book deleted", HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>("Can´t find ID", HttpStatus.BAD_REQUEST);
     }
 }
