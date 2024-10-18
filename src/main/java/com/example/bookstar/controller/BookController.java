@@ -40,4 +40,9 @@ public class BookController {
     public ResponseEntity<String> deleteBook(@PathVariable int id){
         return bookService.deleteBook(id);
     }
+
+    @GetMapping("myBooks")
+    public List<Book> getMyBooks(){
+        return bookService.getMyBooks();
+    }
 }
