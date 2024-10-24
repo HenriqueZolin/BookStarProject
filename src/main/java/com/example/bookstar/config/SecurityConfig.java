@@ -40,11 +40,18 @@ public class SecurityConfig{
                 .authenticationProvider(authenticationProvider) // Adiciona o provider
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/user/register", "/login", "/user/register/**").permitAll()
+                        .requestMatchers("/book/myBooks").authenticated()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
+                        .defaultSuccessUrl("/book/myBooks", true)
                         .permitAll()
+                )
+                .rememberMe((rememberMe) -> rememberMe
+                        .key("uniqueAndSecret") // Chave secreta para o token "lembrar-me"
+                        .tokenValiditySeconds(86400) // 1 dia (você pode alterar a duração)
+                        .rememberMeCookieName("remember-me-cookie") // Nome do cookie "lembrar-me"
                 )
                 .logout((logout) -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
